@@ -15,6 +15,7 @@
   },
   "devDependencies": {
     "kanel": "^3.11.1",
-    "kanel-knex": "^2.4.1"
+    "kanel-knex": "^2.4.1",
+    "schemalint": "^2.1.0"
   }
 }

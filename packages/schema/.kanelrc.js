@@ -14,4 +14,7 @@ module.exports = {
 
   typeFilter: knexTypeFilter,
   preRenderHooks: [generateIndexFile],
+  customTypeMap: {
+    'public.citext': 'string',
+  },
 };
