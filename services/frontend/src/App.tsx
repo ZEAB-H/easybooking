@@ -1,9 +1,6 @@
 import { FC } from 'react';
+import NewBooking from './NewBooking';
 
-const App: FC = () => (
-  <div>
-    <h1 className="text-9xl text-indigo-700">Hello World!</h1>
-  </div>
-);
+const App: FC = () => <NewBooking />;
 
 export default App;
