@@ -1,6 +1,8 @@
 import Router from '@koa/router';
 import Koa from 'koa';
 import KoaLogger from 'koa-logger';
+import { createKoaMiddleware } from 'trpc-koa-adapter';
+import appRouter from './trpc/appRouter';
 
 async function main(): Promise<void> {
   const app = new Koa();
@@ -16,8 +18,14 @@ async function main(): Promise<void> {
   app.use(router.routes());
   app.use(router.allowedMethods());
 
-  app.listen(3001, async () => {
-    console.info('server is Listening very clear!');
+
+
+  const adapter = createKoaMiddleware({ router: appRouter, prefix: "/trpc" });
+  app.use(adapter);
+
+  const PORT = 3000;
+  app.listen(PORT, async () => {
+    console.info(`Server is listening on port ${PORT}`);
   });
 }
 

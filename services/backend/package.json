@@ -11,10 +11,12 @@
   "description": "",
   "dependencies": {
     "@koa/router": "^13.1.0",
+    "@trpc/server": "^10.45.2",
     "koa": "^2.16.0",
     "koa-bodyparser": "^4.4.1",
     "koa-helmet": "^8.0.1",
-    "koa-logger": "^3.2.1"
+    "koa-logger": "^3.2.1",
+    "trpc-koa-adapter": "^1.2.2"
   },
   "devDependencies": {
     "@types/koa": "^2.15.0",
