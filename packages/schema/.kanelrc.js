@@ -1,4 +1,4 @@
-const { knexTypeFilter } = require('kanel-knex');
+const { knexTypeFilter, generateKnexTablesModule } = require('kanel-knex');
 const { generateIndexFile } = require('kanel');
 
 const knexConfig = require('./knexfile');
@@ -13,7 +13,7 @@ module.exports = {
   preDeleteOutputFolder: true,
 
   typeFilter: knexTypeFilter,
-  preRenderHooks: [generateIndexFile],
+  preRenderHooks: [generateIndexFile, generateKnexTablesModule],
   customTypeMap: {
     'public.citext': 'string',
   },

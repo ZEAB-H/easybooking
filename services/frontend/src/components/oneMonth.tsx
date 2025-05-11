@@ -28,7 +28,7 @@ const Day: FC<DayProps> = ({
     'flex h-10 w-10 flex-col items-center justify-center rounded p-1.5 transition-colors duration-100',
     {
       'border-2 border-indigo-600': isToday && isSelected,
-      'border-2 border-indigo-600': isSelected,
+      'border border-indigo-600': isSelected && !isToday,
       'bg-gray-50 text-gray-400': disabled,
       'bg-green-100 text-green-800': !disabled && available,
       'bg-yellow-100 text-yellow-800': !disabled && !available,
@@ -92,7 +92,7 @@ const Calendar: FC<CalendarProps> = ({
       </div>
 <div className="grid grid-cols-7 grid-rows-6 gap-1.5">
   {daysInMonth.map((day) => {
-    if (isSameMonth(day, month)) {
+    if (!isSameMonth(day, month)) {
       return <div key={day.getTime()} />;
     }
     return (
