@@ -4,11 +4,11 @@ import { publicProcedure, router } from "./trpc";
     ping: publicProcedure.output(String).query(() => 'Pong!'),
     getServiceTypes: publicProcedure.query(async () => [
         {
-            id: '1',
+            id: 1,
             name: 'Service Type 1',
         },
         {
-            id: '2',
+            id: 2,
             name: 'Service Type 2',
         },
     ]),

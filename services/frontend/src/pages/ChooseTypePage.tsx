@@ -1,9 +1,11 @@
 import { FC, useContext } from 'react';
 import bookingFlowContext from '../bookingFlowContext';
 import { PrimaryButton } from '../components/buttons';
+import { trpc } from '../trpc';
 
 const ChooseTypePage: FC = () => {
   const { onProceed, state, updateState } = useContext(bookingFlowContext);
+  const { data, isLoading, isSuccess, error } = trpc.useQuery(['getServiceTypes']);
 
   return (
     <div>
@@ -20,38 +22,30 @@ const ChooseTypePage: FC = () => {
         />
         <div className="mt-4 flex flex-col">
           <h1 className="font-bold">Choose a service type:</h1>
-          <ul className="space-y-2">
-            <li className="flex flex-row items-center space-x-2">
-              <input
-                className="cursor-pointer"
-                type="radio"
-                name="type"
-                id="type-1"
-                checked={state.serviceTypeID == 1}
-                onChange={() => {
-                  updateState({ serviceTypeID: 1 });
-                }}
-              />
-              <label className="cursor-pointer" htmlFor="type-1">
-                Type 1
-              </label>
-            </li>
-            <li className="flex flex-row items-center space-x-2">
-              <input
-                className="cursor-pointer"
-                type="radio"
-                name="type"
-                id="type-2"
-                checked={state.serviceTypeID == 2}
-                onChange={() => {
-                  updateState({ serviceTypeID: 2 });
-                }}
-              />
-              <label className="cursor-pointer" htmlFor="type-2">
-                Type 2
-              </label>
-            </li>
-          </ul>
+          {isLoading && <p>Loading service types...</p>}
+          {error && <p className="text-red-500">Error loading service types: {error.message}</p>}
+          {isSuccess && data && (
+            <ul className="space-y-2">
+              {data.map((serviceType: any) => (
+                <li key={serviceType.id} className="flex flex-row items-center space-x-2">
+                  <input
+                    className="cursor-pointer"
+                    type="radio"
+                    name="type"
+                    id={`type-${serviceType.id}`}
+                    value={serviceType.id}
+                    checked={state.serviceTypeID === serviceType.id}
+                    onChange={({target}) => {
+                      updateState({ serviceTypeID: Number(target.value)});
+                    }}
+                  />
+                  <label className="cursor-pointer" htmlFor={`type-${serviceType.id}`}>
+                    {serviceType.name || `Type ${serviceType.id}`}
+                  </label>
+                </li>
+              ))}
+            </ul>
+          )}
         </div>
       </div>
       <div className="mt-4 flex flex-row justify-end">

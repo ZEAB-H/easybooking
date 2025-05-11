@@ -5,7 +5,10 @@
   "private": true,
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "lint": " eslint . -f visualstudio --report-unused-disable-directives --ext .js,.jsx,.ts,.tsx"
+    "lint": " eslint . -f visualstudio --report-unused-disable-directives --ext .js,.jsx,.ts,.tsx",
+    "dev-backend": "npm run  --prefix services/backend dev",
+    "dev-frontend": "npm run  --prefix services/frontend dev",
+    "dev": "npm run dev-backend & npm run dev-frontend --clearScreen=false"
   },
   "author": "",
   "license": "ISC",

@@ -11,4 +11,13 @@ export default defineConfig({
       plugins: [tailwindcss(), autoprefixer()],
     },
   },
+  server: {
+    proxy: {
+      '/trpc': {
+        target: 'http://localhost:3000/trpc',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/trpc/, ''),
+      },
+    },
+  },
 });
