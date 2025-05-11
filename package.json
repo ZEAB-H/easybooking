@@ -15,7 +15,8 @@
   "description": "",
   "workspaces": [
     "packages/schema",
-    "services/backend"
+    "services/backend",
+    "services/frontend"
   ],
   "dependencies": {
     "@tsconfig/recommended": "^1.0.8",
